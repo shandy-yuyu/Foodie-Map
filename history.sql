@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS history (
   PRIMARY KEY (userid, city, district, trade_date, highest_price, lowest_price)
   );
 
-DELETE history
-FROM sys.dm_exec_cached_plans AS p
+DELETE FROM sys.dm_exec_cached_plans AS p
 CROSS APPLY sys.dm_exec_sql_text(p.plan_handle) AS t
 WHERE t.[text] LIKE N 'name';
