@@ -13,3 +13,4 @@
 3. 切至 restaurant 資料表，點匯入，匯入 db.csv (在共用雲端)，如下圖
 ![](https://i.imgur.com/bsV5wqT.png)
 4. 跑 line 23 (移除 csv 多出來的欄位名稱)
+## sql
