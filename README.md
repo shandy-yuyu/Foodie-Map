@@ -13,3 +13,6 @@
 3. 切至 restaurant 資料表，點匯入，匯入 db.csv (在共用雲端)，如下圖
 ![](https://i.imgur.com/bsV5wqT.png)
 4. 跑 line 23 (移除 csv 多出來的欄位名稱)# test
+## preprocess_update.py
+1. 使用 pd 來輸出 db.csv, 去除重複的 row
+2. 用 os.list 自己抓檔名, 只要 json 結尾在 data 資料夾裡面都會被處理
