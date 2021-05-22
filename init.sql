@@ -3,7 +3,7 @@ create database term_project;
 ALTER DATABASE term_project CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 use term_project;
 
-CREATE TABLE IF NOT EXISTS userlis( 
+CREATE TABLE IF NOT EXISTS userlist( 
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     email VARCHAR(255) NOT NULL, 
     password VARCHAR(255) NOT NULL,
