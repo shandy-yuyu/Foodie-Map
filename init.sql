@@ -10,7 +10,15 @@ CREATE TABLE IF NOT EXISTS userlis(
     admin boolean NOT NULL
 );
 
- 
+create table restaurant(
+    name VARCHAR(255),
+    rating float,
+    user_ratings_total int,
+    address VARCHAR(255),
+    latitude float,
+    longitude float,
+    datasource int
+);
 
 CREATE TABLE IF NOT EXISTS history (
   userid int NOT NULL,
