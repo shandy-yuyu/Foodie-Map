@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS userlist(
 );
 
 create table restaurant(
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     name VARCHAR(255),
     rating float,
     user_ratings_total int,

@@ -15,8 +15,8 @@
         if($query['rest_lon'] == ""){
             $query['rest_lon'] = 'NULL';
         }
-        $sql = "INSERT INTO `restaurant` (`name`, `address`, `latitude`, `longitude`) 
-        VALUES (\"".$query['rest_name']."\", \"".$query['rest_address']."\", ".$query['rest_lat'].", ".$query['rest_lon'].");";
+        $sql = "INSERT INTO `restaurant` (`name`, `address`, `latitude`, `longitude`, `datasource`) 
+        VALUES (\"".$query['rest_name']."\", \"".$query['rest_address']."\", ".$query['rest_lat'].", ".$query['rest_lon'].", ".$_COOKIE['id'].");";
         $result = mysqli_query($conn, $sql);
         $conn->close();
         if($result){

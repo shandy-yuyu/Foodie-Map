@@ -1,4 +1,7 @@
-
+<?php
+    require_once dirname(__FILE__)."./db_conn.php";
+    cheat_user();
+?>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
