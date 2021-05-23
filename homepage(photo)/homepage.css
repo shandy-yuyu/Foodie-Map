@@ -1,0 +1,44 @@
+
+<style type="text/css">
+
+    h2 { font-family: Consolas, monaco, monospace; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } 
+    p { font-family: Consolas, monaco, monospace; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } 
+    blockquote { font-family: Consolas, monaco, monospace; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } 
+
+    #top-right {
+        margin-top: 20px;
+        background-color: #C42A65;
+        height: 120px;
+        width: 890px;
+        text-align: left;
+        float: left;
+        margin-down: 20px;
+    }
+    #top-left {
+        margin-top: 20px;
+        background-color: #C42A65;
+        height: 120px;
+        width: 550px;
+        text-align: right;
+        float: right;
+        margin-down: 20px;
+    }
+    #gallery {
+        height: 800px;
+        width: 1440px;
+        line-height: 800px;
+        text-align: center;
+        background-color: #C42A65;
+    }
+
+    #bottom {
+        margin-top: 50px;
+        background-color: #C42A65;
+        height: 130px;
+        width: 1440px;
+        text-align: left;
+        line-height: 15px;
+        float: left;
+    }
+
+</style>
