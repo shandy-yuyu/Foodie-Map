@@ -1,23 +1,35 @@
 <?php
     require_once dirname(__FILE__)."./db_conn.php";
-    cheat_user();
     if(isset($_GET['submit'])){
         echo $_GET['submit'];
     }
-    
     if(isset($_GET['submit'])){
         $sql = "Delete from restaurant where id = ".$_GET['submit'];
         echo $sql;
         $conn = db_conn();
         $result = mysqli_query($conn, $sql);
-        if($result){
-            // header("Location: ./manage.php?message=刪除成功");
-        }
-        else{
-            // header("Location: ./manage.php?message=刪除失敗");
-        }
-        
     }
+if(isset($_COOKIE['login'])){
+?>
+    <div class="top" style="background-color: #c42a65;padding-top: 20px; text-align: right;"> 
+        <a href="./homepage.php"><h1 style="color:white;text-align: center;">Foodie  Map  for  U</h1></a>
+        <?php echo '<h4 style="padding-right: 20px">Your Email '.$_COOKIE['email']."</h4>"; ?>
+        <?php
+            if($_COOKIE['admin']){
+                echo '<img src="./asset/admin.png" alt="admin.png" width="50" height="50" vspace="37" style="margin-right: 40px;">';
+                echo '<a href="./manage.php"><img src="./asset/mange.png" alt="mange.png" width="50" height="50" vspace="37" style="margin-right: 40px;"></a>';
+            }
+            else{
+                echo '<img src="./asset/user.png" alt="user.png" width="50" height="50" vspace="37" style="margin-right: 40px;">';
+                echo '<a href="./search.php"><img src="./asset/search.png" alt="search.png" width="50" height="50" vspace="37" style="margin-right: 40px;"></a>';
+            }
+        ?>
+    </div>
+<?php
+}
+else{
+}
+
 ?>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

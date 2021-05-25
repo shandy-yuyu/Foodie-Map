@@ -1,20 +1,19 @@
 <?php
-require_once dirname(__FILE__)."../include/head.php";
-require_once dirname(__FILE__)."./login_nav.php";
-require_once dirname(__FILE__)."../animations/svg.php";
+require_once dirname(__FILE__)."./head.php";
+require_once dirname(__FILE__) . "./nav_bar.php";
 
 unset($_SESSION['login']);
 unset($_SESSION['id']);
 unset($_SESSION['email']);
 ?>
-
+<body style="background-color: #c42a65;">
 <div class="container">
 	<div class="wrapper">
 		<form
 			id="form"
 			class="form-signin"
 			method="get"
-			action="../models/login_check.php"
+			action="./login_check.php"
 		>
 			<h3 class="form-signin-heading">Login</h3>
 			<input
@@ -42,6 +41,7 @@ unset($_SESSION['email']);
 		</form>
 	</div>
 </div>
+</body>
 
 <script>
 if(getUrlVars()['error']) {
