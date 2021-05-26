@@ -1,10 +1,6 @@
 <?php
 require_once dirname(__FILE__)."./head.php";
 require_once dirname(__FILE__) . "./nav_bar.php";
-
-unset($_SESSION['login']);
-unset($_SESSION['id']);
-unset($_SESSION['email']);
 ?>
 <body style="background-color: #c42a65;">
 <div class="container">

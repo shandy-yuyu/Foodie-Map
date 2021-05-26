@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . "./head.php";
 require_once dirname(__FILE__) . "./nav_bar.php";
-
 ?>
 <body style="background-color: #c42a65;">
 <div style="background-color: white; text-align: center">

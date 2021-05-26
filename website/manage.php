@@ -1,35 +1,12 @@
 <?php
     require_once dirname(__FILE__)."./db_conn.php";
-    if(isset($_GET['submit'])){
-        echo $_GET['submit'];
-    }
-    if(isset($_GET['submit'])){
-        $sql = "Delete from restaurant where id = ".$_GET['submit'];
-        echo $sql;
+    require_once dirname(__FILE__)."./head.php";
+    if(isset($_GET['del'])){
+        $sql = "Delete from restaurant where id = ".$_GET['del'];
         $conn = db_conn();
         $result = mysqli_query($conn, $sql);
     }
-if(isset($_COOKIE['login'])){
-?>
-    <div class="top" style="background-color: #c42a65;padding-top: 20px; text-align: right;"> 
-        <a href="./homepage.php"><h1 style="color:white;text-align: center;">Foodie  Map  for  U</h1></a>
-        <?php echo '<h4 style="padding-right: 20px">Your Email '.$_COOKIE['email']."</h4>"; ?>
-        <?php
-            if($_COOKIE['admin']){
-                echo '<img src="./asset/admin.png" alt="admin.png" width="50" height="50" vspace="37" style="margin-right: 40px;">';
-                echo '<a href="./manage.php"><img src="./asset/mange.png" alt="mange.png" width="50" height="50" vspace="37" style="margin-right: 40px;"></a>';
-            }
-            else{
-                echo '<img src="./asset/user.png" alt="user.png" width="50" height="50" vspace="37" style="margin-right: 40px;">';
-                echo '<a href="./search.php"><img src="./asset/search.png" alt="search.png" width="50" height="50" vspace="37" style="margin-right: 40px;"></a>';
-            }
-        ?>
-    </div>
-<?php
-}
-else{
-}
-
+    require_once dirname(__FILE__)."./nav_bar.php";
 ?>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -41,15 +18,29 @@ else{
 <head>
     <link rel="stylesheet"  type="text/css"  href="resume.css" >
     <style>
-        table, th, td {
-            border: 1px solid black;
+        table{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        tr th{
+            font-weight:bold;
+            align-items: center;
+        }
+        tr th, tr td{
+            padding:5px;
+        }
+        th{
+            border: 5px solid #C1DAD7;
+        }
+        td{
+            border: 5px solid #C1DAD7;
         }
     </style>
 </head>
 <title>Page Title</title>
 <body style="background-color: #FFFFFF;">
 
-<div>
+<div style="text-align: center;padding: 20px;">
     <form
     id="form"
     method="get"
@@ -98,9 +89,9 @@ else{
     </form>	
 </div>
 
-<div>
+<div style="text-align: center; padding: 20px;">
     <h5>已新增的餐廳</h5>
-    <table style="width:80%">
+    <table style="width:80%;text-align: center;align-self: center;align: center;">
     <tr>
         <th>餐廳名稱</th>
         <th>地址</th>
@@ -132,7 +123,7 @@ else{
             action="./manage.php"       
             > 
             <button 
-                name="submit" 
+                name="del" 
                 value="<?php echo $row['id']; ?>" 
                 type="submit"
             ><b>刪除</b></button>

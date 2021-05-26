@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__)."./db_check.php";
 
-session_start();
 if (isset($_GET['submit'])){
   $query = [
     'email' => htmlspecialchars($_GET["email"]),

@@ -1,10 +1,6 @@
-<?php
-session_start();
-?>
 <title>Foodie Map</title>
 <meta charset="UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<link href="./style.css" rel="stylesheet" >
 <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -27,7 +23,6 @@ session_start();
   crossorigin="anonymous"
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="./md5.js"></script>
 <script>
 $(document).ready(function() {
   $('body').addClass('animate-in');
