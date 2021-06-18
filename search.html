@@ -1,0 +1,83 @@
+
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<head>
+
+<title>Search</title>
+<body style="background-color: #FFFFFF;">
+
+<div id=search>
+    <form
+    id="form"
+    method="get"
+    action="./search.php"       
+    >  
+    <form> City/County + District
+    <label><input id="city" name="city" type="text">縣/市</label>
+    <label><input id="district" name="district" type="text">區</label>
+    </form>
+
+    <form> Latitude
+    <label><input id="lat1" name="lat1" type="number">度</label>
+    <label><input id="lat2" name="lat2" type="number">分</label>
+    <label><input id="lat3" name="lat3" type="number" step="0.01" require="">秒</label>
+    </form>
+
+    <form> Longtitude
+    <label><input id="long1" name="long1" type="number">區</label>
+    <label><input id="long3" name="long2" type="number"> 分</label>
+    <label><input id="long3" name="long3" type="number" step="0.01"> 秒</label>
+    </form>
+
+    <button 
+        name="submit" 
+        value="add" 
+        type="submit"
+    ><b>Submit</b></button>
+</div>
+
+<div id=result>
+    <h5>Search Result</h5>
+    <tr>
+        <th>餐廳名稱</th>
+        <th>地址</th>
+        <th>緯度</th>
+        <th>經度</th>
+    </tr>
+    
+</table>
+</div>
+
+</body>
+</html>
+
+<style type="text/css">
+
+    h2 { font-family: Consolas, monaco, monospace; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } 
+    p { font-family: Consolas, monaco, monospace; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } 
+    blockquote { font-family: Consolas, monaco, monospace; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } 
+
+    #search {
+        margin-top: 100px;
+        background-color: #FFFFFF;
+        height: 300px;
+        width: 1404px;
+        text-align: center;
+        float: left;
+    }
+
+    #result {
+        margin-top: 100px;
+        background-color: #FFFFFF;
+        height: 300px;
+        width: 1404px;
+        text-align: center;
+        float: left;
+    }
+
+</style>
