@@ -11,7 +11,7 @@ if(isset($_GET['submit'])){
 if(isset($_COOKIE['login'])){
 ?>
     <div class="top" style="background-color: #c42a65;padding-top: 20px; text-align: right;"> 
-        <h1 style="color:white;text-align: center;">Foodie  Map  for  U</h1>
+        <a href="./homepage.php" style="color:white;text-decoration:none;"><h1 style="color:white;text-align: center;">Foodie  Map  for  U</h1></a>
         <?php echo '<h4 style="padding-right: 20px">Your Email '.$_COOKIE['email']."</h4>"; ?>
         <?php
             if($_COOKIE['admin']){
@@ -40,7 +40,7 @@ if(isset($_COOKIE['login'])){
 else{
 ?>
 	<div class="top" style="background-color: #c42a65;padding-top: 20px; text-align: right;"> 
-		<h1 style="color:white;text-align: center;">Foodie  Map  for  U</h1>
+        <a href="./homepage.php" style="color:white;text-decoration:none;"><h1 style="color:white;text-align: center;">Foodie  Map  for  U</h1></a>
 
 		<a href="./login.php"><img src="./asset/login.png" width="50" height="50" vspace="37" style="margin-right: 40px;"></a>
 
