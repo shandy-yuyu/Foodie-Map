@@ -55,42 +55,29 @@ function db_conn() {
 
 
 
-</table>
-<table width=”1000” border=”1”>
-
-       <tr height=”50” align=”center”>
-
-          <td width=”50”>Userid</td>
-
-         <td width=”200”>City</td>
-
-          <td width=”450”><button type="button">Delete</button> </strong></center></td>
-
-       </tr>
-
-<?php
-  echo " <table width='500' height='120' border='1'>";
-  for ($i=1; $i<=10; $i++)
-  {
-    echo "<tr>";
-    for ($j=1; $j<=3; $j++)
-    {
-      echo "<td height='30'></td>";
-    }
-      echo "</tr>";
-    }
-?>
-
 
 <?php
   $result = mysqli_query($conn, "SELECT userid, city FROM history");
 
   
+
+  echo " <table width='500' height='120' border='1'>";
+  ?>
+  <tr height=”50” align=”center”>
+    <td width=”50”>Userid</td>
+    <td width=”200”>City</td>
+    <td width=”450”>Delete</center></td>
+  </tr>
+  <?php
   while ($row = mysqli_fetch_assoc($result))
   {
-    printf("%s (%s)\n", $row["userid"], $row["city"]);
+    echo "<tr>";
+    echo "<td height='30'>".$row["userid"]."</td>";
+    echo "<td height='30'>".$row["city"]."</td>";
+    echo "<td width='450'><button type='button'>Delete</button></strong></center></td>";
+    
+    echo "</tr>";
   }
-
 
   
   if(isset($_GET['message']))
