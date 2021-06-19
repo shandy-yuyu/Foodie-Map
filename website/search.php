@@ -41,8 +41,8 @@ require_once dirname(__FILE__)."./nav_bar.php";
     >
     <h4>搜尋餐廳</h4>
     <label>縣/市區<input id="city" name="city" type="text"></label><br>
-    <label>緯度 (ex.23.42), 可不填<input id="lat" name="lat" type="number"></label><br>
-    <label>經度 (ex.121.22), 可不填<input id="lon" name="lon" type="number"></label><br>
+    <label>緯度 (ex.23.42), 可不填<input id="lat" name="lat" ></label><br>
+    <label>經度 (ex.121.22), 可不填<input id="lon" name="lon" ></label><br>
 
     <button 
         name="submit" 
@@ -70,8 +70,8 @@ require_once dirname(__FILE__)."./nav_bar.php";
     if(isset($_GET['submit'])&&$_GET['submit'] == 'add'){
         $query = [
             'city' => htmlspecialchars($_GET["city"]),
-            'lat' => htmlspecialchars($_GET["lat"]),
-            'lon' => htmlspecialchars($_GET["lon"])
+            'lat' => (float) htmlspecialchars($_GET["lat"]),
+            'lon' => (float) htmlspecialchars($_GET["lon"])
         ];
         if($query['lat'] == ""){
             $query['lat'] = 'NULL';
@@ -82,7 +82,7 @@ require_once dirname(__FILE__)."./nav_bar.php";
         $his = "INSERT INTO `history` (`userid`, `city`, `latitude`, `longitude`) 
         VALUES (\"".$userid."\", \"".$query['city']."\", ".$query['lat'].", ".$query['lon'].");";
         mysqli_query($conn, $his);
-        if($query['lat']=="" && $query['lon']==""){
+        if($query['lat']=="NULL" && $query['lon']=="NULL"){
             if($query['city'] == ""){
                 $sql = "SELECT * FROM restaurant";
             }
@@ -94,8 +94,9 @@ require_once dirname(__FILE__)."./nav_bar.php";
         else{
             $tmp_lon = $query['lon'];
             $tmp_lat = $query['lat'];
-            $sql = "SELECT * FROM restaurant WHERE (longitude-'$tmp_lon'<1) and (latitud-'$tmp_lat'<1)";
+            $sql = "SELECT * FROM restaurant WHERE (longitude - $tmp_lon <1) and (latitude - $tmp_lat <1)";
         }
+        echo $sql;
         $result = mysqli_query($conn, $sql);
         $conn->close();
         for($i = 0; $i < $result->num_rows; $i += 1){
