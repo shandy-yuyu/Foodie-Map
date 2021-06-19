@@ -5,8 +5,8 @@ if(isset($_GET['submit'])){
 		setcookie('id', "");
 		setcookie('admin', "");
 		setcookie('email', "");
+        header("Location: ./homepage.php");
 	}
-	header("Location: ./homepage.php");
 }
 if(isset($_COOKIE['login'])){
 ?>

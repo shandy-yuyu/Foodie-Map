@@ -77,8 +77,8 @@ require_once dirname(__FILE__)."./nav_bar.php";
                 $sql = "SELECT * FROM restaurant";
             }
             else{
-                $tmp = $query['city'].'%';
-                $sql = "SELECT * FROM restaurant WHERE address like $tmp";
+                $tmp = '%'.$query['city'].'%';
+                $sql = "SELECT * FROM restaurant WHERE address like '$tmp'";
             }
         }
         else{
@@ -96,7 +96,7 @@ require_once dirname(__FILE__)."./nav_bar.php";
             echo '<td>'.$row['address'].'</td>';
             echo '<td>'.$row['latitude'].'</td>';
             echo '<td>'.$row['longitude'].'</td>';
-            echo '<td>';
+            echo '<tr>';
         }
     }
 ?>
