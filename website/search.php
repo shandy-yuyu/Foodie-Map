@@ -71,7 +71,15 @@ require_once dirname(__FILE__)."./nav_bar.php";
             'lat' => htmlspecialchars($_GET["lat"]),
             'lon' => htmlspecialchars($_GET["lon"])
         ];
-
+        if($query['lat'] == ""){
+            $query['lat'] = 'NULL';
+        }
+        if($query['lon'] == ""){
+            $query['lon'] = 'NULL';
+        }
+        $his = "INSERT INTO `history` (`userid`, `city`, `latitude`, `longitude`) 
+        VALUES (\"".$userid."\", \"".$query['city']."\", ".$query['lat'].", ".$query['lon'].");";
+        mysqli_query($conn, $his);
         if($query['lat']=="" && $query['lon']==""){
             if($query['city'] == ""){
                 $sql = "SELECT * FROM restaurant";
@@ -86,7 +94,6 @@ require_once dirname(__FILE__)."./nav_bar.php";
             $tmp_lat = $query['lat'];
             $sql = "SELECT * FROM restaurant WHERE (longitude-'$tmp_lon'<1) and (latitud-'$tmp_lat'<1)";
         }
-        echo $sql;
         $result = mysqli_query($conn, $sql);
         $conn->close();
         for($i = 0; $i < $result->num_rows; $i += 1){
