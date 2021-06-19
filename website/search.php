@@ -12,7 +12,25 @@ require_once dirname(__FILE__)."./nav_bar.php";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <head>
-
+    <style>
+        table{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        tr th{
+            font-weight:bold;
+            align-items: center;
+        }
+        tr th, tr td{
+            padding:5px;
+        }
+        th{
+            border: 5px solid #C1DAD7;
+        }
+        td{
+            border: 5px solid #C1DAD7;
+        }
+    </style>
 <title>Search</title>
 <body style="background-color: #FFFFFF;">
 
@@ -20,22 +38,23 @@ require_once dirname(__FILE__)."./nav_bar.php";
     <form
     id="form"
     method="get"
-    action="./history.php"      
-    >    
-    <h5>搜尋餐廳</h5>
-    <form> 縣/市區 <label><input id="city" name="city" type="text"></label></form>
-    <form> 緯度 (ex.23.42), 可不填<label><input id="lat" name="lat" type="number"></label></form>
-    <form> 經度 (ex.121.22), 可不填 <label><input id="lon" name="lon" type="number"></label></form>
+    >
+    <h4>搜尋餐廳</h4>
+    <label>縣/市區<input id="city" name="city" type="text"></label><br>
+    <label>緯度 (ex.23.42), 可不填<input id="lat" name="lat" type="number"></label><br>
+    <label>經度 (ex.121.22), 可不填<input id="lon" name="lon" type="number"></label><br>
 
     <button 
         name="submit" 
         value="add" 
         type="submit"
     ><b>搜尋</b></button>
+    </form>
 </div>
 
 <div style="text-align: center; padding: 20px;">
     <h5>搜尋結果</h5>
+    <table>
     <tr>
         <th>餐廳名稱</th>
         <th>地址</th>
@@ -46,7 +65,7 @@ require_once dirname(__FILE__)."./nav_bar.php";
     <?php
     $userid = $_COOKIE['id'];
     $conn = db_conn();
-    if($_GET['submit'] == 'add'){
+    if(isset($_GET['submit'])&&$_GET['submit'] == 'add'){
         $query = [
             'city' => htmlspecialchars($_GET["city"]),
             'lat' => htmlspecialchars($_GET["lat"]),
@@ -67,20 +86,21 @@ require_once dirname(__FILE__)."./nav_bar.php";
             $tmp_lat = $query['lat'];
             $sql = "SELECT * FROM restaurant WHERE (longitude-'$tmp_lon'<1) and (latitud-'$tmp_lat'<1)";
         }
+        echo $sql;
         $result = mysqli_query($conn, $sql);
         $conn->close();
-    }
-
-    for($i = 0; $i < $result->num_rows; $i += 1){
-        $row = $result->fetch_assoc();
-        echo '<tr>';
-        echo '<td>'.$row['name'].'</td>';
-        echo '<td>'.$row['address'].'</td>';
-        echo '<td>'.$row['latitude'].'</td>';
-        echo '<td>'.$row['longitude'].'</td>';
-        echo '<td>';
+        for($i = 0; $i < $result->num_rows; $i += 1){
+            $row = $result->fetch_assoc();
+            echo '<tr>';
+            echo '<td>'.$row['name'].'</td>';
+            echo '<td>'.$row['address'].'</td>';
+            echo '<td>'.$row['latitude'].'</td>';
+            echo '<td>'.$row['longitude'].'</td>';
+            echo '<td>';
+        }
     }
 ?>
+    </table>
 </div>
 </body>
 </html>
