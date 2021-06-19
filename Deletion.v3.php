@@ -84,7 +84,7 @@ function db_conn() {
 
 
 <?php
-     if(isset($_POST['submit']))
+     if(isset($_POST['button submit']))
      {
         $sql ="DELETE FROM history WHERE userid=".$_GET[userid];
         header( "location:Deletion.v4.php");
