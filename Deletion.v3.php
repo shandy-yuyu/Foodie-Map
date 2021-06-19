@@ -54,12 +54,10 @@ function db_conn() {
 
 
 
-
-
 <?php
   $result = mysqli_query($conn, "SELECT userid, city FROM history");
 
-  
+
 
   echo " <table width='500' height='120' border='1'>";
   ?>
@@ -68,24 +66,42 @@ function db_conn() {
     <td width=”200”>City</td>
     <td width=”450”>Delete</center></td>
   </tr>
+
+
+
+
   <?php
   while ($row = mysqli_fetch_assoc($result))
   {
     echo "<tr>";
     echo "<td height='30'>".$row["userid"]."</td>";
     echo "<td height='30'>".$row["city"]."</td>";
-    echo "<td width='450'><button type='button'>Delete</button></strong></center></td>";
-    
+    echo "<td width='450'><button submit='click' type='button'>Delete</button></strong></center></td>";
     echo "</tr>";
   }
+  ?>
 
-  
+
+
+<?php
+     if(isset($_POST['submit']))
+     {
+        $sql ="DELETE FROM history WHERE userid=".$_GET[userid];
+        header( "location:Deletion.v4.php");
+     }
+?>
+
+
+
+<?php
   if(isset($_GET['message']))
   {
     echo "<script> alert(\"".$_GET['message']."\") </script>";
     $_GET['message'] = "";
   }
 
-
 ?>
+
+
+<input type ="button" onclick="javascript:location.href='homepage.html'" value="Return to Homepage"></input>
 
