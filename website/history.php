@@ -2,82 +2,50 @@
   require_once dirname(__FILE__)."./db_conn.php";
   require_once dirname(__FILE__)."./head.php";
   require_once dirname(__FILE__)."./nav_bar.php";
-
-
-
-
-  if(isset($_GET['message']))
-  {
-    $sql = "DELETE FROM history WHERE userid = ".$_GET['submit'];
-    echo $sql;
-    $conn = db_conn();
-    $result = mysqli_query($conn, $sql);
-
-    if ($result)
-    {
-      header("Location: ./manage.php?message = Data has been deleted from history");
-    }
-
-    else
-    {
-      header("Location: ./manage.php?message = Fail to delete data from history");
-    }
-
-  }
-
-
-
-  setcookie('id', '2');
-  $userid = $_COOKIE['id'];
-  $sql = "SELECT city FROM history WHERE userid = '$userid' ";
-  $conn = db_conn();
-  $result = mysqli_query($conn, $sql);
-  $conn-> close();
-
-  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-  $conn = db_conn();
 ?>
-
+<head>
+    <style>
+        table{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        tr th{
+            font-weight:bold;
+            align-items: center;
+        }
+        tr th, tr td{
+            padding:5px;
+        }
+        th{
+            border: 5px solid #C1DAD7;
+        }
+        td{
+            border: 5px solid #C1DAD7;
+        }
+    </style>
+<title>history</title>
 <body>
-  <!-- <br />	<br />	<br />	<br />
-  <tr><td align="center"><b><font size="80"><font face="細明體, Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletion table</font></font></b></td></tr>
-  <br />	<br />	<br />	<br /> -->
-
-
-
-
-
+<h2 style="color: black;text-align: center;">搜尋紀錄</h2>
 <?php
-  $result = mysqli_query($conn, "SELECT userid, city FROM history");
-
+  $conn = db_conn();
+  $result = mysqli_query($conn, "SELECT distinct city, latitude, longitude  FROM history where userid=".$_COOKIE['id']);
+?>
   
-
-  echo " <table width='500' height='120' border='1'>";
-  ?>
-  <tr height=”50” align=”center”>
-    <td width=”50”>Userid</td>
-    <td width=”200”>City</td>
-    <td width=”450”>Delete</center></td>
+  <table>
+  <tr>
+      <th>城市</th>
+      <th>緯度</th>
+      <th>經度</th>
   </tr>
-  <?php
-  while ($row = mysqli_fetch_assoc($result))
-  {
-    echo "<tr>";
-    echo "<td height='30'>".$row["userid"]."</td>";
-    echo "<td height='30'>".$row["city"]."</td>";
-    echo "<td width='450'><button type='button'>Delete</button></strong></center></td>";
-    
-    echo "</tr>";
+<?php
+  $conn->close();
+  for($i = 0; $i < $result->num_rows; $i += 1){
+      $row = $result->fetch_assoc();
+      echo '<tr>';
+      echo '<td>'.$row['city'].'</td>';
+      echo '<td>'.$row['latitude'].'</td>';
+      echo '<td>'.$row['longitude'].'</td>';
+      echo '<tr>';
   }
-
-  
-  if(isset($_GET['message']))
-  {
-    echo "<script> alert(\"".$_GET['message']."\") </script>";
-    $_GET['message'] = "";
-  }
-
-
 ?>
 
