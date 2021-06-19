@@ -51,7 +51,7 @@ require_once dirname(__FILE__)."./nav_bar.php";
     ><b>搜尋</b></button>
     </form>
 </div>
-
+<a herf="./history.php" style="color:white;text-decoration:none;"><h5>搜尋歷史</h5></a>
 <div style="text-align: center; padding: 20px;">
     <h5>搜尋結果</h5>
     <table>
