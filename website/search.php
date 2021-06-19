@@ -88,7 +88,7 @@ require_once dirname(__FILE__)."./nav_bar.php";
             }
             else{
                 $tmp = '%'.$query['city'].'%';
-                $sql = "SELECT * FROM restaurant WHERE address like '$tmp'";
+                $sql = "SELECT * FROM restaurant WHERE name like '$tmp'";
             }
         }
         else{

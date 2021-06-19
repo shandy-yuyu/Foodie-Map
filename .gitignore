@@ -3,4 +3,5 @@ key.txt
 .vscode
 .DS_Store
 db_new.csv
+db.csv
 data*
