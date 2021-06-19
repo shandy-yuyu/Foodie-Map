@@ -1,85 +1,86 @@
 <?php
-    require_once dirname(__FILE__)."./db_conn.php";
-    require_once dirname(__FILE__)."./head.php";
-    require_once dirname(__FILE__)."./nav_bar.php";
+require_once dirname(__FILE__)."./db_conn.php";
+require_once dirname(__FILE__)."./head.php";
+require_once dirname(__FILE__)."./nav_bar.php";
 ?>
 
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<head>
 
-<?php
-    require_once dirname(__FILE__)."./db_conn.php";
+<title>Search</title>
+<body style="background-color: #FFFFFF;">
 
+<div style="text-align: center;padding: 20px;">
+    <form
+    id="form"
+    method="get"
+    action="./history.php"      
+    >    
+    <h5>搜尋餐廳</h5>
+    <form> 縣/市區 <label><input id="city" name="city" type="text"></label></form>
+    <form> 緯度 (ex.23.42), 可不填<label><input id="lat" name="lat" type="number"></label></form>
+    <form> 經度 (ex.121.22), 可不填 <label><input id="lon" name="lon" type="number"></label></form>
+
+    <button 
+        name="submit" 
+        value="add" 
+        type="submit"
+    ><b>搜尋</b></button>
+</div>
+
+<div style="text-align: center; padding: 20px;">
+    <h5>搜尋結果</h5>
+    <tr>
+        <th>餐廳名稱</th>
+        <th>地址</th>
+        <th>緯度</th>
+        <th>經度</th>
+    </tr>
+    
+    <?php
+    $userid = $_COOKIE['id'];
     $conn = db_conn();
     if($_GET['submit'] == 'add'){
         $query = [
             'city' => htmlspecialchars($_GET["city"]),
-            'district' => htmlspecialchars($_GET["district"]),
-            'lat1' => htmlspecialchars($_GET["lat1"]),
-            'lat2' => htmlspecialchars($_GET["lat2"]),
-            'lat3' => htmlspecialchars($_GET["lat3"]),
-            'long1' => htmlspecialchars($_GET["long1"]),
-            'long2' => htmlspecialchars($_GET["long2"]),
-            'long3' => htmlspecialchars($_GET["long3"])
+            'lat' => htmlspecialchars($_GET["lat"]),
+            'lon' => htmlspecialchars($_GET["lon"])
         ];
-        if($query['lat1'] == "")  { $query['lat1'] = 'NULL';  }
-        if($query['lat2'] == "")  { $query['lat2'] = 'NULL';  }
-        if($query['lat3'] == "")  { $query['lat3'] = 'NULL';  }
 
-        if($query['long1'] == "") {  $query['long1'] = 'NULL';  }
-        if($query['long2'] == "") {  $query['long2'] = 'NULL';  }
-        if($query['long3'] == "") {  $query['long3'] = 'NULL';  }
-
-        if($query['lat1']=="" && $query['lat2']=="" && $query['lat3']=="" && $query['long1']=="" && $query['long2']=="" && $query['long3']==""){
-          $sql = "SELECT FROM `restaurant` WHERE  $_COOKIE["rest_address"] like 'concat($query["district"],$_COOKIE["rest_address"])%'";
-        }
-
-        VALUES (\"".$query['rest_name']."\", \"".$query['rest_address']."\", ".$query['rest_lat'].", ".$query['rest_lon'].", ".$_COOKIE['id'].");";
-        $result = mysqli_query($conn, $sql);
-
-        
-        $conn->close();
-        if($result){
-            header("Location: ./manage.php?message=新增成功");
+        if($query['lat']=="" && $query['lon']==""){
+            if($query['city'] == ""){
+                $sql = "SELECT * FROM restaurant";
+            }
+            else{
+                $tmp = $query['city'].'%';
+                $sql = "SELECT * FROM restaurant WHERE address like $tmp";
+            }
         }
         else{
-            header("Location: ./manage.php?message=新增失敗");
+            $tmp_lon = $query['lon'];
+            $tmp_lat = $query['lat'];
+            $sql = "SELECT * FROM restaurant WHERE (longitude-'$tmp_lon'<1) and (latitud-'$tmp_lat'<1)";
         }
+        $result = mysqli_query($conn, $sql);
+        $conn->close();
     }
-?>
-
-
-
-<?php
-    $userid = $_COOKIE['id'];
-    $sql = "SELECT id, name, address, latitude, longitude FROM restaurant WHERE datasource = '$userid'";
-    $conn = db_conn();
-    $result = mysqli_query($conn, $sql);
-    $conn->close();
 
     for($i = 0; $i < $result->num_rows; $i += 1){
-        //fetch_assoc()
         $row = $result->fetch_assoc();
         echo '<tr>';
         echo '<td>'.$row['name'].'</td>';
         echo '<td>'.$row['address'].'</td>';
         echo '<td>'.$row['latitude'].'</td>';
         echo '<td>'.$row['longitude'].'</td>';
-        // echo '<td>'.$row['lowest_price'].'</td>';
         echo '<td>';
-        ?>
-        <form
-        id="form2"
-        method="get"
-        action="./manage.php"       
-        > 
-        <button 
-            name="del" 
-            value="<?php echo $row['id']; ?>" 
-            type="submit"
-        ><b>刪除</b></button>
-        </form>
-        <?php	
-        echo '</td>';
-        echo '</tr>';
     }
 ?>
-
+</div>
+</body>
+</html>
