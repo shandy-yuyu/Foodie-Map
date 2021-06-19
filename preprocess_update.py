@@ -28,7 +28,7 @@ for foldername in files:
 merge_df = merge_df.drop_duplicates()
 merge_df['id'] = ""
 merge_df['datasorce'] = ""
-
+df = df.reindex(columns=['id','name', 'lat', 'lng', 'rating', 'user_ratings_total', 'address','datasorce'])
 print(merge_df.shape)
 merge_df.to_csv("./db.csv", index=False)
 
